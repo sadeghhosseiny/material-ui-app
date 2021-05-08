@@ -19,11 +19,11 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 const useStyle = makeStyles((theme) => ({
   superRoot: {
     width: "280px",
-    transition: "300ms"
+    transition: "0.4s ease-in-out"
   },
   FocusedSuperRoot: {
     width: "480px",
-    transition: "300ms"
+    transition: "0.4s ease-in-out"
   },
   root: {
     position: "relative",
@@ -41,7 +41,7 @@ const useStyle = makeStyles((theme) => ({
     color: "#333",
     borderRadius: "4px",
     margin: "8px",
-    transition: "200ms"
+    transition: "0.4s ease-in-out"
   },
   btnContainer: {
     position: "absolute",
@@ -89,16 +89,9 @@ const useStyle = makeStyles((theme) => ({
     backgroundImage: "linear-gradient(45deg, #FFC312, #EE5A24, #00A8FF)",
   },
 
-  drawer:{
+  list:{
     // background:"red",
-    width:"35%",
-    marginRight:"100px",
-    marginLeft:"200px",
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    
+    width:"250px",    
   },
 
   drawerHeader: {
@@ -106,6 +99,7 @@ const useStyle = makeStyles((theme) => ({
     alignItems: 'center',
     // padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
+    transition:"0.4s ease-in-out",
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
     transition: theme.transitions.create('margin', {
@@ -119,10 +113,11 @@ const useStyle = makeStyles((theme) => ({
 function Navbar() {
   const classes = useStyle();
   const [isFocused, setIsFocused] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [pen, setOpen] = useState({left: false});
 
-  const handleDrawer = () => {
-    setOpen(!open);
+  const handleDrawer = (side, open) => (event) => {
+    setOpen({...pen, [side]:open})
+    console.log("shit", pen)
   }
 
   return (
@@ -133,7 +128,7 @@ function Navbar() {
             className={classes.menuButton}
             edge="start"
             color="inherit"
-            onClick={() => handleDrawer()}
+            onClick={handleDrawer("left",true)}
 
           >
             <MenuIcon />
@@ -162,16 +157,18 @@ function Navbar() {
           </Button>
         </Toolbar>
       </AppBar>
-      { open && 
-      <Drawer variant="permanent" className={classes.drawer}>
+      
+
+      { pen && 
+      <Drawer open={pen.left} >
         <div className={classes.drawerHeader}>
 
-        <IconButton onClick={() => setOpen()}>
+        <IconButton onClick={handleDrawer("left", false)}>
         <ChevronLeftIcon />
 
           </IconButton>
         </div>
-      <List>
+      <List className={classes.list}>
           {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem button key={text}>
               {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
@@ -181,7 +178,8 @@ function Navbar() {
           
         </List>
       </Drawer>}
-    </div>
+          </div>
+   
   );
 }
 
