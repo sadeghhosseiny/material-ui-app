@@ -113,11 +113,11 @@ const useStyle = makeStyles((theme) => ({
 function Navbar() {
   const classes = useStyle();
   const [isFocused, setIsFocused] = useState(false);
-  const [pen, setOpen] = useState({left: false});
+  const [open, setOpen] = useState({left: false});
 
   const handleDrawer = (side, open) => (event) => {
-    setOpen({...pen, [side]:open})
-    console.log("shit", pen)
+    setOpen({...open, [side]:open})
+    console.log("shit", open)
   }
 
   return (
@@ -159,8 +159,8 @@ function Navbar() {
       </AppBar>
       
 
-      { pen && 
-      <Drawer open={pen.left} >
+      { open && 
+      <Drawer transitionDuration={500} open={open.left} >
         <div className={classes.drawerHeader}>
 
         <IconButton onClick={handleDrawer("left", false)}>
