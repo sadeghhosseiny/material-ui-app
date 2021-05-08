@@ -8,7 +8,12 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
 import InputBase from "@material-ui/core/InputBase";
-import SearchIcon from "@material-ui/icons/Search";
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import Drawer from '@material-ui/core/Drawer';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from '@material-ui/core/ListItem';
+import List from '@material-ui/core/List';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 
 const useStyle = makeStyles((theme) => ({
@@ -62,7 +67,9 @@ const useStyle = makeStyles((theme) => ({
 
   menuButton: {
     marginRight: "5px",
+
   },
+
   loginButton: {
     marginLeft: "auto",
     color: "white",
@@ -81,11 +88,42 @@ const useStyle = makeStyles((theme) => ({
   tr: {
     backgroundImage: "linear-gradient(45deg, #FFC312, #EE5A24, #00A8FF)",
   },
+
+  drawer:{
+    // background:"red",
+    width:"35%",
+    marginRight:"100px",
+    marginLeft:"200px",
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    
+  },
+
+  drawerHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    // padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+
 }));
 
 function Navbar() {
   const classes = useStyle();
   const [isFocused, setIsFocused] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleDrawer = () => {
+    setOpen(!open);
+  }
 
   return (
     <div>
@@ -95,6 +133,8 @@ function Navbar() {
             className={classes.menuButton}
             edge="start"
             color="inherit"
+            onClick={() => handleDrawer()}
+
           >
             <MenuIcon />
           </IconButton>
@@ -122,6 +162,25 @@ function Navbar() {
           </Button>
         </Toolbar>
       </AppBar>
+      { open && 
+      <Drawer variant="permanent" className={classes.drawer}>
+        <div className={classes.drawerHeader}>
+
+        <IconButton onClick={() => setOpen()}>
+        <ChevronLeftIcon />
+
+          </IconButton>
+        </div>
+      <List>
+          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+            <ListItem button key={text}>
+              {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+          
+        </List>
+      </Drawer>}
     </div>
   );
 }
