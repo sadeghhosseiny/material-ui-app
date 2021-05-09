@@ -17,8 +17,20 @@ import List from "@material-ui/core/List";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import HomeIcon from "@material-ui/icons/Home";
 import { ListItemIcon } from "@material-ui/core";
+import {Link} from 'react-router-dom';
 
 const useStyle = makeStyles((theme) => ({
+  // appBarContainer:{
+  //   width:"100%",
+  //   display:"flex",
+  // },
+
+  // appBar:{
+  //   width:"100%",
+  //   display:"flex",
+    
+  // },
+
   superRoot: {
     width: "280px",
     transition: "0.4s ease-in-out",
@@ -69,9 +81,14 @@ const useStyle = makeStyles((theme) => ({
 
   loginButton: {
     marginLeft: "auto",
+    // width:"100%",
+    display:"flex",
+    justifyContent:"flex-end",
     color: "white",
     padding: "8px 20px",
     backgroundSize: "200%",
+    textDecoration:"none",
+    display:"inline-block",
     // transition:"all 1s linear",
     transition: "0.5s ease-out",
 
@@ -80,6 +97,12 @@ const useStyle = makeStyles((theme) => ({
       backgroundPosition: "right",
       transform: "scale(1.1)",
     },
+  },
+
+  btnMainContainer:{
+    width:"100%",
+    display:"flex",
+    justifyContent:"flex-end"
   },
 
   tr: {
@@ -133,8 +156,8 @@ function Navbar() {
   };
 
   return (
-    <div>
-      <AppBar position="static">
+    <div className={classes.appBarContainer}>
+      <AppBar className={classes.appBar} position="static">
         <Toolbar>
           <IconButton
             className={classes.menuButton}
@@ -166,10 +189,14 @@ function Navbar() {
               </span>
             </div>
           </div>
-
+            <div className={classes.btnMainContainer}>
+          <Link to="/LoginPage">
+              
           <Button className={`${classes.loginButton} ${classes.tr}`}>
             Login
           </Button>
+          </Link>
+            </div>
         </Toolbar>
       </AppBar>
 
