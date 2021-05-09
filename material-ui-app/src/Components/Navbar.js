@@ -20,16 +20,6 @@ import { ListItemIcon } from "@material-ui/core";
 import {Link} from 'react-router-dom';
 
 const useStyle = makeStyles((theme) => ({
-  // appBarContainer:{
-  //   width:"100%",
-  //   display:"flex",
-  // },
-
-  // appBar:{
-  //   width:"100%",
-  //   display:"flex",
-    
-  // },
 
   superRoot: {
     width: "280px",
@@ -57,11 +47,19 @@ const useStyle = makeStyles((theme) => ({
     margin: "8px",
     transition: "0.4s ease-in-out",
   },
+
   btnContainer: {
     position: "absolute",
     top: "12px",
     left: "16px",
   },
+
+  link:{
+    textDecoration:"none",
+    color:"white",
+    
+  },
+
   icon: {
     padding: "7px",
     transition: "0.4s ease-in-out",
@@ -82,8 +80,8 @@ const useStyle = makeStyles((theme) => ({
   loginButton: {
     marginLeft: "auto",
     // width:"100%",
-    display:"flex",
-    justifyContent:"flex-end",
+    // display:"flex",
+    // justifyContent:"flex-end",
     color: "white",
     padding: "8px 20px",
     backgroundSize: "200%",
@@ -99,11 +97,11 @@ const useStyle = makeStyles((theme) => ({
     },
   },
 
-  btnMainContainer:{
-    width:"100%",
-    display:"flex",
-    justifyContent:"flex-end"
-  },
+  // btnMainContainer:{
+  //   // width:"100%",
+  //   display:"flex",
+  //   justifyContent:"flex-end"
+  // },
 
   tr: {
     backgroundImage: "linear-gradient(45deg, #FFC312, #EE5A24, #00A8FF)",
@@ -189,14 +187,14 @@ function Navbar() {
               </span>
             </div>
           </div>
-            <div className={classes.btnMainContainer}>
-          <Link to="/LoginPage">
+            {/* <div className={classes.btnMainContainer}> */}
               
           <Button className={`${classes.loginButton} ${classes.tr}`}>
+          <Link className={classes.link} to="/LoginPage">
             Login
-          </Button>
           </Link>
-            </div>
+          </Button>
+            {/* </div> */}
         </Toolbar>
       </AppBar>
 
