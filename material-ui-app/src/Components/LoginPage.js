@@ -4,7 +4,8 @@ import {makeStyles} from '@material-ui/core/styles';
 const useStyle = makeStyles((theme) => ({
     Text:{
         fontWeight:"bold",
-        textAlign:"center"
+        textAlign:"center",
+        fontSize:"40px"
     },
 }));
 
@@ -13,7 +14,7 @@ function LoginPage() {
     return (
         <div>
            <div className={classes.Text}>
-               <h2>Material-Ui</h2>
+               <h1>Material-Ui</h1>
            </div>
         </div>
     )
