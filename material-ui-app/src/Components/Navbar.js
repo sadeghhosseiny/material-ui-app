@@ -57,6 +57,8 @@ const useStyle = makeStyles((theme) => ({
   link:{
     textDecoration:"none",
     color:"white",
+    display:"flex",
+    marginLeft:"auto"
     
   },
 
@@ -78,10 +80,6 @@ const useStyle = makeStyles((theme) => ({
   },
 
   loginButton: {
-    marginLeft: "auto",
-    // width:"100%",
-    // display:"flex",
-    // justifyContent:"flex-end",
     color: "white",
     padding: "8px 20px",
     backgroundSize: "200%",
@@ -189,11 +187,11 @@ function Navbar() {
           </div>
             {/* <div className={classes.btnMainContainer}> */}
               
-          <Button className={`${classes.loginButton} ${classes.tr}`}>
           <Link className={classes.link} to="/LoginPage">
+          <Button className={`${classes.loginButton} ${classes.tr}`}>
             Login
-          </Link>
           </Button>
+          </Link>
             {/* </div> */}
         </Toolbar>
       </AppBar>
