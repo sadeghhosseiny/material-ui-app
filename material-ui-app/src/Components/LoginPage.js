@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 // import TextField from '@material-ui/core/TextField';
 import {Formik, Form, Field} from 'formik';
 import {TextField} from 'formik-material-ui';
-import { Button, LinearProgress } from '@material-ui/core';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Backdrop from '@material-ui/core/Backdrop';
+import Dialog from '@material-ui/core/Dialog';
 
 
 const useStyle = makeStyles((theme) => ({
@@ -35,13 +39,17 @@ const useStyle = makeStyles((theme) => ({
 
         form:{
             height:"100%",
-            // width:"100%",
+            width:"100%",
             display:"flex",
             // background:"red",
             flexDirection:"column",
             justifyContent:"center",
             alignItems:"center",
             // alignContent:'center',
+        },
+
+        diaLoading:{
+          backdropFilter:"blur(1px)",
         },
 
         // F:{
@@ -53,6 +61,13 @@ const useStyle = makeStyles((theme) => ({
 
 function LoginPage() {
     const classes = useStyle();
+    const [temp, setTemp] = useState(false);
+    const [open, setOpen] = useState(false);
+
+    // const submit = () => {
+    //     setTemp(true);
+    // } 
+
     return (
         
         <Formik className={classes.F}
@@ -74,17 +89,20 @@ function LoginPage() {
           {
             errors.password = 'Required';
           }
-          else if (values.password.length < 8)
+          else if (values.password.length <= 8)
           {
             errors.password = "your password must be greater than 8 characters";
           }
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
+          setTemp(true);
+          setOpen(true);
           setTimeout(() => {
             setSubmitting(false);
+            setOpen(false);
             alert(JSON.stringify(values, null, 2));
-          }, 500);
+          }, 2000);
         }}
       >
         {({ submitForm, isSubmitting }) => (
@@ -109,11 +127,19 @@ function LoginPage() {
               variant="contained"
               color="primary"
               disabled={isSubmitting}
-              onClick={submitForm}
+              onClick={() => submitForm()
+              }
               >
               Submit
-            </Button> 
-                {isSubmitting && <LinearProgress />}
+            </Button>
+            <Dialog className={classes.diaLoading} open={open}>
+        
+              <Backdrop open={open}>
+                <CircularProgress color="secondary" />
+              </Backdrop>
+
+            </Dialog>
+              
           </Form>
          )} 
       </Formik>

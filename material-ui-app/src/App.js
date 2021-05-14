@@ -6,9 +6,10 @@ import {makeStyles} from '@material-ui/core/styles';
 
 const useStyle = makeStyles((theme) => ({
   mainDiv:{
-    height:"100%",
-    width:"100%",
-    overflow:"hidden",
+    height:"100% !important",
+    width:"100% !important",
+    background:"skyblue",
+    overflow:"auto",
     position:"absolute",
 
   },
