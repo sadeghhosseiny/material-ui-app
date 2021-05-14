@@ -38,8 +38,8 @@ const useStyle = makeStyles((theme) => ({
         },
 
         form:{
-            height:"100%",
-            width:"100%",
+            // height:"100%",
+            // width:"100%",
             display:"flex",
             // background:"red",
             flexDirection:"column",
@@ -52,10 +52,26 @@ const useStyle = makeStyles((theme) => ({
           backdropFilter:"blur(1px)",
         },
 
-        // F:{
-        //     height:"100% !important",
-        //     width:"100%"
-        // },
+        link:{
+          textDecoration:"none"
+        },
+
+        F:{
+          // width:"100%",
+          height:"100%",
+          display:"grid",
+          alignContent:"center"
+            // background:"red",
+            // flexDirection:"column",
+            // justifyContent:"center",
+            // alignItems:"center",
+          // display:"flex"
+        },
+
+        text:{
+          textAlign:"center",
+          
+        }
 
 }));
 
@@ -65,20 +81,13 @@ function LoginPage() {
     const [open, setOpen] = useState(false);
     const history = useHistory();
 
-    const shit = () =>{
-
-      if (temp == true){
-        history.push("/");
-      }
-
-    }
-
-    // const submit = () => {
-    //     setTemp(true);
-    // } 
 
     return (
-        
+      <div className={classes.F}>
+
+        <div className={classes.text}>
+          <h1>Material-Ui</h1>
+        </div>
         <Formik className={classes.F}
         initialValues={{
           email: '',
@@ -91,31 +100,32 @@ function LoginPage() {
             
           } else if (
             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.com/i.test(values.email)
-          ) {
-            errors.email = 'Invalid email address';
-          }
-          if(!values.password)
-          {
-            errors.password = 'Required';
-          }
-          else if (values.password.length <= 8)
-          {
-            errors.password = "your password must be greater than 8 characters";
-          }
-          return errors;
-        }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTemp(true);
-          setOpen(true);
-          setTimeout(() => {
-            setSubmitting(false);
-            setOpen(false);
-            alert(JSON.stringify(values, null, 2));
-            history.push("/");
-          }, 2000);
-        }}
-      >
+            ) {
+              errors.email = 'Invalid email address';
+            }
+            if(!values.password)
+            {
+              errors.password = 'Required';
+            }
+            else if (values.password.length <= 8)
+            {
+              errors.password = "your password must be greater than 8 characters";
+            }
+            return errors;
+          }}
+          onSubmit={(values, { setSubmitting }) => {
+            setTemp(true);
+            setOpen(true);
+            setTimeout(() => {
+              setSubmitting(false);
+              setOpen(false);
+              alert(JSON.stringify(values, null, 2));
+              history.push("/");
+            }, 2000);
+          }}
+          >
         {({ submitForm, isSubmitting }) => (
+
           <Form className={classes.form}>
             <Field
               component={TextField}
@@ -123,8 +133,8 @@ function LoginPage() {
               type="email"
               label="Email"
               className={classes.textField}
-             
-            />
+              
+              />
             <br />
             <Field
               component={TextField}
@@ -133,10 +143,9 @@ function LoginPage() {
               name="password"
               className={classes.textField}
               
-            />
+              />
             <br />
-            <Link onClick={() => shit()
-              } >
+            <Link className={classes.link}>
             <Button
               variant="contained"
               color="primary"
@@ -158,6 +167,7 @@ function LoginPage() {
           </Form>
          )} 
       </Formik>
+         </div>
     );
 }
 
