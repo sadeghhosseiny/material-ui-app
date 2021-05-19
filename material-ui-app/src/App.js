@@ -3,6 +3,7 @@ import LoginPage from './Components/LoginPage';
 import Navbar from './Components/Navbar';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import {makeStyles} from '@material-ui/core/styles';
+import Home from './Components/Home';
 
 const useStyle = makeStyles((theme) => ({
   mainDiv:{
@@ -25,8 +26,8 @@ function App() {
       <LoginPage />
       </Route>
       <Route exact path="/">
-
       <Navbar />
+      <Home />
       </Route>
         
         </Switch>
