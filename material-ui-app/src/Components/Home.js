@@ -8,15 +8,19 @@ function Home() {
     useEffect(() => {
         axios.get(`https://jsonplaceholder.typicode.com/posts`)
         .then(res => {
-            const len = res.data.length - 50;
+            
+            let i = 0;
+            //console.log("LEN",len);
             res.data.forEach(data => {
-               for(let i = 0; i < len; i ++)
-               {
+                if(i <= 50){
+                   //console.log(data.length);
                     temp.push(data);
-                    //setPosts([...temp, data]);
-               }
+                    i++;
+                    setPosts([...temp]);
+                }
             }
             )
+            console.log("posts",posts);
             console.log("TEMP", temp);
                 //console.log(data);
     
@@ -30,9 +34,9 @@ function Home() {
     return (
         <div>
             <ol>
-                {temp ? temp.map(po => {
+                {temp.map(po => {
                     return <li key={po.id}>{po.title}</li>
-                }): "Loading"}
+                })}
             </ol>
         </div>
     )
