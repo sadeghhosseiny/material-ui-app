@@ -2,9 +2,22 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Grid, Paper} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
-
+import {CSSTransition} from 'react-transition-group';
+import Button from '@material-ui/core/Button';
 
 const useStyle = makeStyles((theme) => ({
+
+    "@keyframes myEffect": {
+        "0%": {
+          opacity: 0,
+          transform: "translateY(-200%)"
+        },
+        "100%": {
+          opacity: 1,
+          transform: "translateY(0)"
+        }
+      },
+
     item:{
         color:"white",
         backgroundColor:"grey",
@@ -12,12 +25,29 @@ const useStyle = makeStyles((theme) => ({
         width:"100px",
         height:"auto",
         padding:"6px",
+        marginBottom:"10px",
+        
         // padding:"10px",
         // margin:"15px"
     },
 
+    container:{
+        paddingLeft:"45px",
+        paddingRight:"45px"
+    },
+
+    gridItem:{
+        textAlign:"-webkit-center",
+        animation: `$myEffect 3000ms ${theme.transitions.easing.easeInOut}`
+    },
+
+    loadMoreBtn:{
+        textAlign:"center",
+    },
+
     root:{
-        flexGrow:"1"
+        flexGrow:"1",
+        paddingLeft:"15%"
     }
 
 }));
@@ -26,6 +56,7 @@ function Home() {
 
     const classes = useStyle();
     const [posts, setPosts] = useState([]);
+    const [dataSlice, setDataSlice] = useState(4);
 
     useEffect(() => {
         axios.get(`https://jsonplaceholder.typicode.com/posts`)
@@ -46,25 +77,38 @@ function Home() {
         })
     }, [])
 
+    const showMoreItem = () => {
+        setDataSlice((prevValue) => prevValue + 4)
+    }
+
     return (
         <div className={classes.root}>
-            <Grid container>
+
+            <Grid container className={classes.container}>
                 {console.log("Posts", posts)}
                
               
-                    {posts ? posts.map(post => {
+                    {posts ? posts.slice(0, dataSlice).map(post => {
                         return(
-                            <Grid item xs={6} md={1} >
+                            <Grid item xs={6} md={3} className={classes.gridItem} >
 
+                                {/* <CSSTransition
+                                timeout={350}
+                                unmountOnExit> */}
                             <Paper className={classes.item} key={post.id}>
 
                                 {post.title}
                             </Paper>
+                        {/* </CSSTransition> */}
                         </Grid>
                             )  
-                        }): "Loading"} 
+                        }): "Loading"}
                 
             </Grid>
+            <div className={classes.loadMoreBtn}>
+
+                    <Button variant="contained" color="primary" onClick={showMoreItem}>Load More</Button> 
+            </div>
         </div>
     )
 }
