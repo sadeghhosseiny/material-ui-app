@@ -11,8 +11,7 @@ const useStyle = makeStyles((theme) => ({
         textAlign: 'center',
         width:"100px",
         height:"auto",
-        padding:"0 !important",
-        margin:"0 !important"
+        padding:"6px",
         // padding:"10px",
         // margin:"15px"
     },
@@ -49,13 +48,13 @@ function Home() {
 
     return (
         <div className={classes.root}>
-            <Grid container spacing={2}>
+            <Grid container>
                 {console.log("Posts", posts)}
                
               
                     {posts ? posts.map(post => {
                         return(
-                            <Grid container item xs={6} md={3} >
+                            <Grid item xs={6} md={1} >
 
                             <Paper className={classes.item} key={post.id}>
 
