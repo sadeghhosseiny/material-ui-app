@@ -1,9 +1,31 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import {Grid, Paper} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
 
+
+const useStyle = makeStyles((theme) => ({
+    item:{
+        color:"white",
+        backgroundColor:"grey",
+        textAlign: 'center',
+        width:"100px",
+        height:"auto",
+        padding:"0 !important",
+        margin:"0 !important"
+        // padding:"10px",
+        // margin:"15px"
+    },
+
+    root:{
+        flexGrow:"1"
+    }
+
+}));
 
 function Home() {
 
+    const classes = useStyle();
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
@@ -26,13 +48,24 @@ function Home() {
     }, [])
 
     return (
-        <div>
-            {console.log(posts)}
-            <ol>
-                {posts.map(po => {
-                    return <li key={po.id}>{po.title}</li>
-                })}
-            </ol>
+        <div className={classes.root}>
+            <Grid container spacing={2}>
+                {console.log("Posts", posts)}
+               
+              
+                    {posts ? posts.map(post => {
+                        return(
+                            <Grid container item xs={6} md={3} >
+
+                            <Paper className={classes.item} key={post.id}>
+
+                                {post.title}
+                            </Paper>
+                        </Grid>
+                            )  
+                        }): "Loading"} 
+                
+            </Grid>
         </div>
     )
 }
