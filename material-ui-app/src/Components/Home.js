@@ -7,9 +7,20 @@ import Button from '@material-ui/core/Button';
 
 const useStyle = makeStyles((theme) => ({
 
-    "@keyframes myEffect": {
+    "@keyframes loadMoreData": {
         "0%": {
           opacity: 0,
+          transform: "translateY(-200%)"
+        },
+        "100%": {
+          opacity: 1,
+          transform: "translateY(0)"
+        }
+      },
+
+      "@keyframes loadMoreBtn": {
+        "0%": {
+        //   opacity: 0,
           transform: "translateY(-200%)"
         },
         "100%": {
@@ -38,11 +49,17 @@ const useStyle = makeStyles((theme) => ({
 
     gridItem:{
         textAlign:"-webkit-center",
-        animation: `$myEffect 3000ms ${theme.transitions.easing.easeInOut}`
+        animation: `$loadMoreData 1000ms ${theme.transitions.easing.easeInOut}`
     },
 
     loadMoreBtn:{
-        textAlign:"center",
+        // textAlign:"center",
+        animation: `$loadMoreBtn 1000ms ${theme.transitions.easing.easeInOut}`
+        
+    },
+
+    moreBtn:{
+        textAlign:"center"
     },
 
     root:{
@@ -57,6 +74,7 @@ function Home() {
     const classes = useStyle();
     const [posts, setPosts] = useState([]);
     const [dataSlice, setDataSlice] = useState(4);
+    const [bool, setBool] = useState(false);
 
     useEffect(() => {
         axios.get(`https://jsonplaceholder.typicode.com/posts`)
@@ -77,8 +95,22 @@ function Home() {
         })
     }, [])
 
-    const showMoreItem = () => {
-        setDataSlice((prevValue) => prevValue + 4)
+    function sleep(ms) {
+        return new Promise(
+          resolve => setTimeout(resolve, ms)
+        );
+      }
+      
+
+    const showMoreItem = async() => {
+        setDataSlice((prevValue) => prevValue + 4);
+        setBool(true);
+        await sleep(1000);
+        setBool(false);
+        // setTimeout(() => {
+        //     setBool(false);
+
+        // }, 3000)    
     }
 
     return (
@@ -105,9 +137,12 @@ function Home() {
                         }): "Loading"}
                 
             </Grid>
-            <div className={classes.loadMoreBtn}>
+            <div className={`${classes.moreBtn} ${bool ? classes.loadMoreBtn:""}`}
+              >
 
-                    <Button variant="contained" color="primary" onClick={showMoreItem}>Load More</Button> 
+                    <Button variant="contained" color="primary" onClick={showMoreItem} >
+                        Load More
+                        </Button> 
             </div>
         </div>
     )
