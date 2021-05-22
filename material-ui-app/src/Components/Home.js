@@ -90,6 +90,14 @@ function Home() {
   const [dataSlice, setDataSlice] = useState(4);
   const [bool, setBool] = useState(false);
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };  
+
   useEffect(() => {
     axios
       .get(`https://jsonplaceholder.typicode.com/posts`)
@@ -126,25 +134,6 @@ function Home() {
       </Grid>
     );
   };
-    const responsive = {
-      superLargeDesktop: {
-        // the naming can be any, depends on you.
-        breakpoint: { max: 4000, min: 3000 },
-        items: dataSlice + 1
-      },
-      desktop: {
-        breakpoint: { max: 3000, min: 1024 },
-        items: dataSlice - 1
-      },
-      tablet: {
-        breakpoint: { max: 1024, min: 464 },
-        items: dataSlice - 2
-      },
-      mobile: {
-        breakpoint: { max: 464, min: 0 },
-        items: dataSlice - 3
-      }
-    };
 
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -163,9 +152,9 @@ function Home() {
 
   return (
       
-    // <div className={classes.root}>
-    <>
-         <Carousel cols={1} rows={1} gap={2} >
+    <div className={classes.root}>
+    
+         <Carousel cols={4} rows={1} gap={2} >
         {/* <Carousel.Item>
                 <div style={{background:"black", width:"200px", height:"200px"}}>Item 1</div>
       </Carousel.Item>
@@ -197,7 +186,7 @@ function Home() {
       {/* </div> */}
       {/* <Grid container className={classes.container}> */}
                 {console.log("Posts", posts)}
-                {posts ? posts.slice(0, dataSlice).map(post => {
+                {posts ? posts.map(post => {
                     return(
                         
                         
@@ -206,7 +195,7 @@ function Home() {
                         
                         
                         <Carousel.Item>
-                        {post.title}
+                        {post.id}
                             </Carousel.Item>
                         //     {/* <Paper id="pap" className={classes.item} key={post.id}> */}
                         // {/* </Paper> */}
@@ -234,8 +223,8 @@ function Home() {
       </div> */}
 
     
-    {/* </div> */}
-    </>
+    </div> 
+    
   );
 }
 
