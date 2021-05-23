@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Grid, Paper } from "@material-ui/core";
+import clsx from 'clsx';
+import { Grid, IconButton, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { CSSTransition } from "react-transition-group";
 import Button from "@material-ui/core/Button";
-import ReactDOM from "react-dom";
-import $ from "jquery";
-// import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+import Card from '@material-ui/core/Card';
+import Typography from '@material-ui/core/Typography';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Collapse from '@material-ui/core/Collapse';
 import Carousel from 'react-grid-carousel';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import "./home.css";
-import Slider from "react-slick";
-import { CallMissedSharp } from "@material-ui/icons";
+import CardItem from "./CardItem";
+
 
 const useStyle = makeStyles((theme) => ({
   "@keyframes loadMoreData": {
@@ -72,7 +72,18 @@ const useStyle = makeStyles((theme) => ({
 
   root: {
     flexGrow: "1",
-    padding: "2% 8% 1% 8%",
+    padding: "2% 8% 12% 8%",
+  },
+
+  expand: {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)',
   },
 
   // carouselItem:{
@@ -98,6 +109,12 @@ function Home() {
   const [posts, setPosts] = useState([]);
   const [dataSlice, setDataSlice] = useState(4);
   const [bool, setBool] = useState(false);
+  const [expand, setExpand] = useState();
+  
+
+  const handleExpand = () => {
+
+  }
 
   useEffect(() => {
     axios
@@ -106,7 +123,7 @@ function Home() {
         let i = 0;
         //console.log("LEN",len);
         res.data.forEach((data) => {
-          if (i <= 50) {
+          if (i <= 7) {
             setPosts((prev) => [...prev, data]);
             i++;
           }
@@ -162,10 +179,29 @@ function Home() {
                     return(
 
                             <Carousel.Item >
-                              <div className="ic">
-
-                                {post.title}
-                              </div>
+                              <CardItem data={post} />
+                              {/* <Card key={post.id} className="ic">
+                                <CardContent content="p">
+                                  {post.title}
+                                </CardContent>
+                                <CardActions>
+                                  <IconButton className={clsx(classes.expand, {
+                                              [classes.expandOpen]: expand,
+                                                      })}
+                                        onClick={handleExpand}
+                                        aria-expanded={expand}
+                                        aria-label="show more">
+                                    <ExpandMoreIcon />
+                                  </IconButton>
+                                </CardActions>
+                                <Collapse key={post.id} in={expand} timeout={250} unmountOnExit>
+                                  <CardContent>
+                                    <Typography>
+                                      {post.body}
+                                    </Typography>
+                                  </CardContent>
+                                </Collapse>
+                              </Card> */}
                            
                             </Carousel.Item>
                         
