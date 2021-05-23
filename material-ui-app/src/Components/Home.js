@@ -58,12 +58,12 @@ const useStyle = makeStyles((theme) => ({
 
   gridItem: {
     textAlign: "-webkit-center",
-    animation: `$loadMoreData 500ms ${theme.transitions.easing.easeInOut}`,
+    animation: `$loadMoreData 300ms ${theme.transitions.easing.easeInOut}`,
   },
 
   loadMoreBtn: {
     // textAlign:"center",
-    animation: `$loadMoreBtn 500ms ${theme.transitions.easing.easeInOut}`,
+    animation: `$loadMoreBtn 300ms ${theme.transitions.easing.easeInOut}`,
   },
 
   moreBtn: {
@@ -72,16 +72,18 @@ const useStyle = makeStyles((theme) => ({
 
   root: {
     flexGrow: "1",
-    paddingLeft: "15%",
+    padding: "2% 8% 1% 8%",
   },
 
-  App: {
-    backgroundColor: "#5c2e91",
-    backgroundColor: "#fff",
-    color: "#fff",
-    color: "#3498db",
-    textAlign: " center",
-  },
+  carouselItem:{
+    backgroundColor:"grey",
+    width:"145px",
+    height:"135px",
+    borderRadius:"8px",
+    color:"white",
+    padding:"12px"
+  }
+
 }));
 
 function Home() {
@@ -89,14 +91,6 @@ function Home() {
   const [posts, setPosts] = useState([]);
   const [dataSlice, setDataSlice] = useState(4);
   const [bool, setBool] = useState(false);
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
-  };  
 
   useEffect(() => {
     axios
@@ -116,7 +110,7 @@ function Home() {
       });
   }, []);
 
-  const renderSlides = () => {
+  const renderData = () => {
     return (
       <Grid container className={classes.container}>
         {console.log("Posts", posts)}
@@ -142,7 +136,7 @@ function Home() {
   const showMoreItem = async () => {
     setDataSlice((prevValue) => prevValue + 4);
     setBool(true);
-    await sleep(1000);
+    await sleep(500);
     // setTimeout(() => {
     //     setBool(false);
 
@@ -154,64 +148,30 @@ function Home() {
       
     <div className={classes.root}>
     
-         <Carousel cols={4} rows={1} gap={2} >
-        {/* <Carousel.Item>
-                <div style={{background:"black", width:"200px", height:"200px"}}>Item 1</div>
-      </Carousel.Item>
-        <Carousel.Item>
-                <div style={{background:"black", width:"200px", height:"200px"}}>Item 2</div>
-      </Carousel.Item>
-        <Carousel.Item>
-                <div style={{background:"black", width:"200px", height:"200px"}}>Item 3</div>
-      </Carousel.Item>
-        <Carousel.Item>
-                <div style={{background:"black", width:"200px", height:"200px"}}>Item 4</div>
-      </Carousel.Item>
-        <Carousel.Item>
-                <div style={{background:"black", width:"200px", height:"200px"}}>Item 5</div>
-      </Carousel.Item>
-        <Carousel.Item>
-                <div style={{background:"black", width:"200px", height:"200px"}}>Item 6</div>
-      </Carousel.Item>
-        <Carousel.Item>
-                <div style={{background:"black", width:"200px", height:"200px"}}>Item 7</div>
-      </Carousel.Item>
-        <Carousel.Item>
-                <div style={{background:"black", width:"200px", height:"200px"}}>Item 8</div>
-      </Carousel.Item> */}
-        {/* <div> */}
-            {/* {renderSlides()} */}
-        {/* </div> */}
-
-      {/* </div> */}
-      {/* <Grid container className={classes.container}> */}
+         <Carousel className={classes.carouselItem} cols={4} rows={1} gap={10} >
+  
                 {console.log("Posts", posts)}
                 {posts ? posts.map(post => {
                     return(
-                        
-                        
-                        
-                        
-                        
-                        
-                        <Carousel.Item>
-                        {post.id}
-                            </Carousel.Item>
-                        //     {/* <Paper id="pap" className={classes.item} key={post.id}> */}
-                        // {/* </Paper> */}
-                        
-                        // {/*<Grid item xs={6} md={3} className={classes.gridItem} >*/}
-                        
-                        // {/* </Grid> */}
+
+                        <Carousel.Item >
+                          <div className={classes.carouselItem}>
+
+                          {post.title}
+                          </div>
+                        </Carousel.Item>
                         
                         )  
                     }): "Loading"}
-                    
-                    {/* </Grid> */}
                 
                 </Carousel>
+                <hr />
+                <hr />
+                <div>
+                  {renderData()}
+                </div>
 
-      {/* <div className={` ${bool ? classes.loadMoreBtn : ""}`}>
+      <div className={` ${bool ? classes.loadMoreBtn : ""}`}>
         <Button
           id="lm"
           variant="contained"
@@ -220,7 +180,7 @@ function Home() {
         >
           Load More
         </Button>
-      </div> */}
+      </div>
 
     
     </div> 
