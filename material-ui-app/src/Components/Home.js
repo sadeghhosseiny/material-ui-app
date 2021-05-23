@@ -11,7 +11,7 @@ import "react-multi-carousel/lib/styles.css";
 import Carousel from 'react-grid-carousel';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import "./home.css";
 import Slider from "react-slick";
 import { CallMissedSharp } from "@material-ui/icons";
 
@@ -75,14 +75,21 @@ const useStyle = makeStyles((theme) => ({
     padding: "2% 8% 1% 8%",
   },
 
-  carouselItem:{
-    backgroundColor:"grey",
-    width:"145px",
-    height:"135px",
-    borderRadius:"8px",
-    color:"white",
-    padding:"12px"
-  }
+  // carouselItem:{
+  //   backgroundColor:"grey",
+  //   width:"145px",
+  //   height:"135px",
+  //   // borderRadius:"8px",
+  //   color:"white",
+  //   padding:"12px",
+  //   transition: "transform .5s",
+  //   "&:hover":{
+  //     backgroundColor:"grey",
+  //     transform:"scale(1.5)",
+  //     borderRadius:"8px",
+  //     transitions:".5s linear"
+  //   }
+  // },
 
 }));
 
@@ -154,12 +161,13 @@ function Home() {
                 {posts ? posts.map(post => {
                     return(
 
-                        <Carousel.Item >
-                          <div className={classes.carouselItem}>
+                            <Carousel.Item >
+                              <div className="ic">
 
-                          {post.title}
-                          </div>
-                        </Carousel.Item>
+                                {post.title}
+                              </div>
+                           
+                            </Carousel.Item>
                         
                         )  
                     }): "Loading"}

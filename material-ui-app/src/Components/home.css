@@ -1,0 +1,21 @@
+.sc-dnqmqq {
+    /* background-color: grey; */
+    
+    width: 199px;
+    height: 199px;
+    border-radius: 6px;
+    position: relative;
+    padding: 20px;
+}
+
+.ic {
+    transition: transform 0.5s;
+    border-radius: 6px;
+    background-color: grey;
+    color: white;
+    padding: 10px;
+}
+
+.ic:hover {
+    transform: scale(1.2);
+}
