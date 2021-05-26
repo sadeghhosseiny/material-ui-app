@@ -99,6 +99,10 @@ function Home(props) {
     setPage(value);
   };
 
+  const filteredTitles = posts.filter(post => {
+    return post.title.toLowerCase().includes(props.inputText.toLowerCase());
+  })
+
   useEffect(() => {
     axios
       .get(`https://jsonplaceholder.typicode.com/posts`)
@@ -124,17 +128,8 @@ function Home(props) {
     return (
       <Grid container className={classes.container}>
         {console.log("Posts", posts)}
-        {posts
-          ? posts.slice(0, dataSlice).filter((post) => {
-            if (props.inputText == "")
-            {
-              return post
-            }
-            else if(post.title.toLowerCase().includes(props.inputText.toLowerCase()))
-            {
-              return post
-            }
-          }).map((post) => {
+        {filteredTitles
+          ? filteredTitles.slice(0, dataSlice).map((post) => {
               return (
                 <Grid item xs={6} md={3} className={classes.gridItem}>
                   <Paper id="pap" className={classes.item} key={post.id}>
