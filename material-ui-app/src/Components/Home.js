@@ -99,19 +99,6 @@ function Home(props) {
     setPage(value);
   };
 
-  // const searchFiltered = (post) => {
-  //   post.filter(po => {
-  //     if(props.inputText == "")
-  //     {
-  //       return po
-  //     }
-  //     else if(po.title.toLowerCase().includes(props.inputText.toLowerCase()))
-  //     {
-  //       return po
-  //     }
-  //   })
-  // }
-
   useEffect(() => {
     axios
       .get(`https://jsonplaceholder.typicode.com/posts`)
