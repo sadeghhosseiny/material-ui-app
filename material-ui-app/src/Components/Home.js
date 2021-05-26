@@ -106,7 +106,7 @@ function Home(props) {
         let i = 0;
         //console.log("LEN",len);
         res.data.forEach((data) => {
-          if (i <= 4) {
+          if (i <= 49) {
             setPosts((prev) => [...prev, data]);
             i++;
           }
