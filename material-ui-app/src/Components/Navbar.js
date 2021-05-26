@@ -18,6 +18,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import HomeIcon from "@material-ui/icons/Home";
 import { ListItemIcon } from "@material-ui/core";
 import {Link} from 'react-router-dom';
+import Home from "./Home";
 
 const useStyle = makeStyles((theme) => ({
 
@@ -125,7 +126,7 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-function Navbar() {
+function Navbar({setInput}) {
   const classes = useStyle();
   const [isFocused, setIsFocused] = useState(false);
   const [open, setOpen] = useState({ left: false });
@@ -145,12 +146,11 @@ function Navbar() {
       text: "Page3",
     },
   ];
-
+  
   const handleDrawer = (side, open) => (event) => {
     setOpen({ ...open, [side]: open });
-    console.log("shit", open);
   };
-
+  
   return (
     <div className={classes.appBarContainer}>
       <AppBar className={classes.appBar} position="static">
@@ -174,7 +174,8 @@ function Navbar() {
                 placeholder="Search..."
                 onFocus={(e) => setIsFocused(true)}
                 onBlur={(e) => setIsFocused(false)}
-                onChange={(e) => e.target.value}
+                onChange={(e) => setInput(e.target.value)}
+                
               />
               <span className={classes.btnContainer}>
                 <IconButton
@@ -209,7 +210,7 @@ function Navbar() {
               // const {text, icon} = item;
               return (
                 <ListItem button key={"li" + index}>
-                  {/* or you can do that in this way but you should destructor the item to text -> line 191 */}
+                  {/* or you can do that in this way but you should destructor the item to text -> 2 line up */}
                   {/* <ListItemText primary={text} /> */}
                   {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
                   <ListItemText>{item.text}</ListItemText>

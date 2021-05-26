@@ -81,7 +81,7 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-function Home() {
+function Home(props) {
   const classes = useStyle();
   const [posts, setPosts] = useState([]);
   const [dataSlice, setDataSlice] = useState(3);
@@ -99,6 +99,19 @@ function Home() {
     setPage(value);
   };
 
+  // const searchFiltered = (post) => {
+  //   post.filter(po => {
+  //     if(props.inputText == "")
+  //     {
+  //       return po
+  //     }
+  //     else if(po.title.toLowerCase().includes(props.inputText.toLowerCase()))
+  //     {
+  //       return po
+  //     }
+  //   })
+  // }
+
   useEffect(() => {
     axios
       .get(`https://jsonplaceholder.typicode.com/posts`)
@@ -106,7 +119,7 @@ function Home() {
         let i = 0;
         //console.log("LEN",len);
         res.data.forEach((data) => {
-          if (i <= 49) {
+          if (i <= 4) {
             setPosts((prev) => [...prev, data]);
             i++;
           }
@@ -125,11 +138,20 @@ function Home() {
       <Grid container className={classes.container}>
         {console.log("Posts", posts)}
         {posts
-          ? posts.slice(0, dataSlice).map((post) => {
+          ? posts.slice(0, dataSlice).filter((post) => {
+            if (props.inputText == "")
+            {
+              return post
+            }
+            else if(post.title.toLowerCase().includes(props.inputText.toLowerCase()))
+            {
+              return post
+            }
+          }).map((post) => {
               return (
                 <Grid item xs={6} md={3} className={classes.gridItem}>
                   <Paper id="pap" className={classes.item} key={post.id}>
-                    {post.title}
+                    {(post.title)}
                   </Paper>
                 </Grid>
               );
@@ -156,9 +178,9 @@ function Home() {
 
   return (
     <div className={classes.root}>
+      {console.log("inputText from Home",props.inputText)}
       <Carousel
         className={classes.carouselItem}
-        center={true}
         cols={4}
         rows={1}
         gap={10}
