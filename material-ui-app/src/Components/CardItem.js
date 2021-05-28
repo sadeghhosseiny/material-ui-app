@@ -20,6 +20,15 @@ const useStyle = makeStyles((theme)=>({
       expandOpen: {
         transform: 'rotate(180deg)',
       },
+
+      card:{
+        transition: "transform 0.5s",
+        transition:"0.5s",
+        "&:hover":{
+          transform: "scale(1.2)",
+          boxShadow:"3px 3px 3px 5px rgb(0.5, 0.5, 0, 0.5)"
+        }
+      }
 }))
 
 function CardItem({data}) {
@@ -32,7 +41,7 @@ function CardItem({data}) {
 
     return (
         <div>
-            <Card key={data.id} className="ic">
+            <Card key={data.id} className={classes.card}>
                 <CardContent content="p">
                   {data.title}
                 </CardContent>

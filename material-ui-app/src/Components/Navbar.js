@@ -198,7 +198,7 @@ function Navbar({setInput}) {
       </AppBar>
 
       {open && (
-        <Drawer transitionDuration={500} open={open.left}>
+        <Drawer transitionDuration={250} open={open.left}>
           <div className={classes.drawerHeader}>
             <IconButton onClick={handleDrawer("left", false)}>
               <ChevronLeftIcon />
