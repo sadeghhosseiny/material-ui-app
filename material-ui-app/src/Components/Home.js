@@ -89,6 +89,7 @@ function Home(props) {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(2);
   const [data, setData] = useState([]);
+  const [temp, setTemp] = useState(0);
   // const [state, setstate] = useState(initialState)
 
   const indexOflast = page * perPage;
@@ -110,7 +111,7 @@ function Home(props) {
         let i = 0;
         //console.log("LEN",len);
         res.data.forEach((data) => {
-          if (i <= 4) {
+          if (i <= 19) {
             setPosts((prev) => [...prev, data]);
             i++;
           }
@@ -147,14 +148,23 @@ function Home(props) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
+  let len = posts.length;
+  let index = parseInt( len / 3);
+
   const showMoreItem = async () => {
     setDataSlice((prevValue) => prevValue + 3);
-    setBool(true);
-    if (!data)
+    setTemp(temp + 1);
+    if(temp >= index - 1)
     {
+      setBool(false)
+    }
+    else{
+
+      setBool(true);
+      await sleep(500);
       setBool(false);
     }
-    await sleep(500);
+    console.log("TEMP, index", temp, index);
   };
 
   return (
