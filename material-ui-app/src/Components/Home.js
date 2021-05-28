@@ -150,12 +150,11 @@ function Home(props) {
   const showMoreItem = async () => {
     setDataSlice((prevValue) => prevValue + 3);
     setBool(true);
+    if (!data)
+    {
+      setBool(false);
+    }
     await sleep(500);
-    // setTimeout(() => {
-    //     setBool(false);
-
-    // }, 1000)
-    setBool(false);
   };
 
   return (

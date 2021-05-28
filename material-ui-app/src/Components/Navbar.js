@@ -18,7 +18,6 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import HomeIcon from "@material-ui/icons/Home";
 import { ListItemIcon } from "@material-ui/core";
 import {Link} from 'react-router-dom';
-import Home from "./Home";
 
 const useStyle = makeStyles((theme) => ({
 

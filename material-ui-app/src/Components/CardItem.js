@@ -6,8 +6,10 @@ import CardActions from '@material-ui/core/CardActions';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Collapse from '@material-ui/core/Collapse';
 import clsx from 'clsx';
-import { Grid, IconButton, Paper } from "@material-ui/core";
+import { IconButton, Paper } from "@material-ui/core";
+import Button from '@material-ui/core/Button';
 import { makeStyles } from "@material-ui/core/styles";
+import {Link} from 'react-router-dom';
 
 const useStyle = makeStyles((theme)=>({
     expand: {
@@ -28,6 +30,10 @@ const useStyle = makeStyles((theme)=>({
           transform: "scale(1.2)",
           boxShadow:"3px 3px 3px 5px rgb(0.5, 0.5, 0, 0.5)"
         }
+      },
+
+      link:{
+        textDecoration:"none"
       }
 }))
 
@@ -45,13 +51,18 @@ function CardItem({data}) {
                 <CardContent content="p">
                   {data.title}
                 </CardContent>
-                <CardActions>
+                <CardActions disableSpacing>             
+                    <Link className={classes.link} to="/CardPage">
+                      <Button size="small" variant="contained" color="secondary">
+                        Go to card
+                      </Button>
+                    </Link>
                   <IconButton className={clsx(classes.expand, {
-                              [classes.expandOpen]: expand,
-                                      })}
-                        onClick={handleExpand}
-                        aria-expanded={expand}
-                        aria-label="show more">
+                    [classes.expandOpen]: expand,
+                  })}
+                  onClick={handleExpand}
+                  aria-expanded={expand}
+                  aria-label="show more">
                     <ExpandMoreIcon />
                   </IconButton>
                 </CardActions>
