@@ -45,9 +45,15 @@ function CardItem({data}) {
         setExpand(!expand);
     }
 
+    const exe = () => {
+      console.log("<<<<<<clicked>>>>>>>>>>")
+            
+      }
+    
+
     return (
         <div>
-            <Card key={data.id} className={classes.card}>
+            <Card key={data.id} className={classes.card} onClick={() => exe()}>
                 <CardContent content="p">
                   {data.title}
                 </CardContent>

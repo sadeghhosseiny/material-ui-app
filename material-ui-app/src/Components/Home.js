@@ -84,12 +84,12 @@ const useStyle = makeStyles((theme) => ({
 function Home(props) {
   const classes = useStyle();
   const [posts, setPosts] = useState([]);
-  const [dataSlice, setDataSlice] = useState(3);
+  const [dataSlice, setDataSlice] = useState(4);
   const [bool, setBool] = useState(false);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(2);
-  const [data, setData] = useState([]);
   const [temp, setTemp] = useState(0);
+  const [tempArr, setTempArr] = useState([]);
   // const [state, setstate] = useState(initialState)
 
   const indexOflast = page * perPage;
@@ -101,45 +101,59 @@ function Home(props) {
   };
 
   const filteredTitles = posts.filter(post => {
-    return post.title.toLowerCase().includes(props.inputText.toLowerCase());
-  })
+    return post.title.toLowerCase().includes(props.inputText.toLowerCase().trim());
+    //if you want to search letter by letter you should use "startsWith()"
+    //post.title.toLowerCase().startsWith(props.inputText.toLowerCase());
 
+  })
+  
   useEffect(() => {
     axios
-      .get(`https://jsonplaceholder.typicode.com/posts`)
-      .then((res) => {
-        let i = 0;
-        //console.log("LEN",len);
-        res.data.forEach((data) => {
-          if (i <= 19) {
-            setPosts((prev) => [...prev, data]);
-            i++;
-          }
-        });
-      })
-      .catch((error) => {
-        console.log(error);
+    .get(`https://jsonplaceholder.typicode.com/posts`)
+    .then((res) => {
+      let i = 0;
+      //console.log("LEN",len);
+      res.data.forEach((data) => {
+        if (i <= 9) {
+          setPosts((prev) => [...prev, data]);
+          i++;
+        }
       });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    
+    var asdf ="   sadegh  !";
+    const ad = asdf.trim()
+    console.log("ASDF", ad);
   }, []);
 
   //remember:when you use .map(something => {}) in map, you sould return in curly bracket
   //otherwise .map(something=>) it doesn't need
 
+  // const exe = (id) => {
+  //   const newList = posts.filter(post => (post.id !== id))
+  //   setPosts(newList);
+  // }
+
   const renderData = () => {
     return (
       <Grid container className={classes.container}>
         {console.log("Posts", posts)}
+
         {filteredTitles
           ? filteredTitles.slice(0, dataSlice).map((post) => {
-              return (
-                <Grid item xs={6} md={3} className={classes.gridItem}>
+            return (
+              <Grid item xs={6} md={3} className={classes.gridItem} /*onClick={() => exe(post.id)}*/ >
                   <Paper id="pap" className={classes.item} key={post.id}>
                     {(post.title)}
                   </Paper>
                 </Grid>
               );
             })
-          : "Loading"}
+            : "Loading"}
+        
       </Grid>
     );
   };
@@ -149,10 +163,10 @@ function Home(props) {
   }
 
   let len = posts.length;
-  let index = parseInt( len / 3);
+  let index = parseInt( len / 4);
 
   const showMoreItem = async () => {
-    setDataSlice((prevValue) => prevValue + 3);
+    setDataSlice((prevValue) => prevValue + 4);
     setTemp(temp + 1);
     if(temp >= index - 1)
     {
@@ -169,17 +183,18 @@ function Home(props) {
 
   return (
     <div className={classes.root}>
-      {console.log("inputText from Home",props.inputText)}
+      {console.log("inputText from Home",props.inputText.trim())}
       <Carousel
         className={classes.carouselItem}
         cols={4}
         rows={1}
         gap={10}
+        
       >
         {console.log("Posts", posts)}
         {posts ? posts.map((post) => {
               return (
-                <Carousel.Item>
+                <Carousel.Item >
                   <CardItem data={post} />
                 </Carousel.Item>
               );
@@ -205,8 +220,8 @@ function Home(props) {
       <div style={{ display: "flex", padding: "6px" }}>
         {currentPosts.map((cr) => {
           return (
-            <div style={{ padding: "8px" }} key={cr.id}>
-              {cr.id}
+            <div style={{ padding: "15px" }} key={cr.id}>
+              {cr.title}
             </div>
           );
         })}
