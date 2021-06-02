@@ -21,15 +21,21 @@ const useStyle = makeStyles((theme) => ({
             paddingBottom: 0,
             marginTop: 0,
             fontWeight: 500,
+            "& .MuiFormHelperText-root.Mui-error":{
+              color:"maroon"
+            },
+
+            "& .MuiFormLabel-root.Mui-error":{
+              color:"black"
+            },
             "& .MuiInput-underline:after": {
                 borderBottomColor: "purple",
                 borderBottom:"3px solid",
               },
               "& .MuiInput-underline:before":{
-                  borderColor:"grey"
+                  borderColor:"black"
               },
               "& .MuiInput-underline:hover:before":{
-                  borderColor:"grey",
                   borderBottom:"1px solid"
               },
             
@@ -54,11 +60,12 @@ const useStyle = makeStyles((theme) => ({
           textDecoration:"none"
         },
 
-        F:{
+        mainRoot:{
           // width:"100%",
           height:"100%",
           display:"grid",
-          alignContent:"center"
+          alignContent:"center",
+          background:"linear-gradient(180deg, #000000d1, rgb(245 0 87 / 4%));"
             // background:"red",
             // flexDirection:"column",
             // justifyContent:"center",
@@ -81,12 +88,12 @@ function LoginPage() {
 
 
     return (
-      <div className={classes.F}>
+      <div className={classes.mainRoot}>
 
         <div className={classes.text}>
           <h1>Material-Ui</h1>
         </div>
-        <Formik className={classes.F}
+        <Formik
         initialValues={{
           email: '',
           password: '',
