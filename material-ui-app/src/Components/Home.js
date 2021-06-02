@@ -180,7 +180,6 @@ function Home(props) {
 
   return (
     <div className={classes.root}>
-      {console.log("inputText from Home",props.inputText.trim())}
       <Carousel
         className={classes.carouselItem}
         cols={4}

@@ -9,7 +9,7 @@ const useStyle = makeStyles((theme) => ({
   mainDiv:{
     height:"100% !important",
     width:"100% !important",
-    background:"skyblue",
+    background:"linear-gradient(180deg, black, transparent);",
     overflow:"auto",
     position:"absolute",
 
