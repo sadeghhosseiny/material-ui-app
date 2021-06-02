@@ -114,7 +114,7 @@ function Home(props) {
       let i = 0;
       //console.log("LEN",len);
       res.data.forEach((data) => {
-        if (i <= 9) {
+        if (i <= 4) {
           setPosts((prev) => [...prev, data]);
           i++;
         }
@@ -124,9 +124,7 @@ function Home(props) {
       console.log(error);
     });
     
-    var asdf ="   sadegh  !";
-    const ad = asdf.trim()
-    console.log("ASDF", ad);
+    
   }, []);
 
   //remember:when you use .map(something => {}) in map, you sould return in curly bracket
@@ -136,7 +134,6 @@ function Home(props) {
   //   const newList = posts.filter(post => (post.id !== id))
   //   setPosts(newList);
   // }
-
   const renderData = () => {
     return (
       <Grid container className={classes.container}>

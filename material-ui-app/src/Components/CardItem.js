@@ -10,6 +10,7 @@ import { IconButton, Paper } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 import { makeStyles } from "@material-ui/core/styles";
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 const useStyle = makeStyles((theme)=>({
     expand: {
@@ -58,7 +59,7 @@ function CardItem({data}) {
                   {data.title}
                 </CardContent>
                 <CardActions disableSpacing>             
-                    <Link className={classes.link} to="/CardPage">
+                    <Link className={classes.link} to={`/CardPage/${data.id}`}>
                       <Button size="small" variant="contained" color="secondary">
                         Go to card
                       </Button>

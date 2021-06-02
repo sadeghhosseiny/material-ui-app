@@ -25,7 +25,7 @@ function App() {
       <Route path="/LoginPage">
       <LoginPage />
       </Route>
-      <Route path="/CardPage">
+      <Route path="/CardPage/:id">
         <CardPage />
       </Route>
       <Route exact path="/">
