@@ -1,9 +1,7 @@
 import React, {useState } from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-// import TextField from '@material-ui/core/TextField';
 import {Formik, Form, Field} from 'formik';
 import {TextField} from 'formik-material-ui';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';

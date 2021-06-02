@@ -1,14 +1,16 @@
 import axios from 'axios';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useRouteMatch } from 'react-router';
 
 function CardPage() {
-    const data = useRouteMatch();
-    console.log(data.params.id)
+    const [data, setData] = useState([])
+    const dataMatch = useRouteMatch();
+    console.log(dataMatch.params.id)
     useEffect(() => {
-        axios.get(`https://jsonplaceholder.typicode.com/posts?id=${data.params.id}`)
+        axios.get(`https://jsonplaceholder.typicode.com/photos?id=${dataMatch.params.id}`)
         .then(res => {
-            console.log(res);
+            setData(res.data);
+            console.log(res.data);
         })
         .catch(err=> {
             console.log(err);
@@ -17,7 +19,16 @@ function CardPage() {
     
     return (
         <div>
-            <h1>This is Card page</h1>
+            {data ? data.map(myData => {
+                return(
+                    <div>
+
+                    <h1 key={myData.id}>{myData.title}</h1>
+                    <img style={{width:"300px", height:"300px"}} src="https://via.placeholder.com/600/92c952" alt="square" />
+                    </div>
+                    )
+                }
+            ):""}
         </div>
     )
 }
