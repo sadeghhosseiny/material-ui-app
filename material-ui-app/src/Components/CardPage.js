@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import { useRouteMatch } from 'react-router';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyle = makeStyles((theme) => ({
     root:{
@@ -11,6 +12,28 @@ const useStyle = makeStyles((theme) => ({
         height:"100%",
         position:"absolute"
     },
+
+    loading:{
+        marginTop:"8%",
+        display:"flex",
+        marginLeft:"auto",
+        marginRight:"auto"
+    },
+
+    image:{
+        width:"200px",
+        height:"200px",
+        borderRadius:"20px"        
+    },
+
+    imageDiv: {
+        display:"flex",
+        justifyContent:"center"
+    },
+
+    text:{
+        textAlign:"center"
+    }
     
 }))
 
@@ -18,19 +41,23 @@ function CardPage() {
     const classes = useStyle();
     const [data, setData] = useState([])
     const dataMatch = useRouteMatch();
+    const [temp, setTemp] = useState(false)
 
     console.log(dataMatch.params.id)
 
     useEffect(() => {
-        axios.get(`https://jsonplaceholder.typicode.com/photos?id=${dataMatch.params.id}`)
-        .then(res => {
-            setData(res.data);
-            console.log(res.data);
-        })
-        .catch(err=> {
-            console.log(err);
-        })
-    }, [])
+        setTimeout(() => {
+            setTemp(!temp);
+            axios.get(`https://jsonplaceholder.typicode.com/photos?id=${dataMatch.params.id}`)
+            .then(res => {
+                setData(res.data);
+                console.log(res.data);
+            })
+            .catch(err=> {
+                console.log(err);
+            })
+        }, 2000)
+        }, [])
 
     const renderCardInfo = () => {
         return (
@@ -39,11 +66,13 @@ function CardPage() {
             {data ? data.map(myData => {
                 return(
                     <div>
+                    <div className={classes.text}>
+
+                        <h1 key={myData.id}>{myData.title}</h1>
+                    </div>
                     
-                    <h1 key={myData.id}>{myData.title}</h1>
-                    
-                    <div>
-                    <img style={{width:"300px", height:"300px"}} src="https://via.placeholder.com/600/92c952" alt="square" />
+                    <div className={classes.imageDiv}>
+                    <img className={classes.image} src="https://via.placeholder.com/600/92c952" alt="square" />
                     </div>
                     </div>
                     )
@@ -51,12 +80,15 @@ function CardPage() {
                 ):""}
                 </div>
                 )
-            }
+            }    
             
             return (
-        <div className={classes.root}>
-            {renderCardInfo()}
-        </div>
+             <div className={classes.root}>
+                {!temp ? <CircularProgress thickness={3} size="70px" className={classes.loading} color="primary" /> : ""}
+                <div>
+                    {renderCardInfo()}
+                </div>
+             </div>
     )
 }
 
