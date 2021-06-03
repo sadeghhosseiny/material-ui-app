@@ -7,7 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const useStyle = makeStyles((theme) => ({
     root:{
         flexGrow:"1",
-        background:"grey",
+        background:"linear-gradient(0deg, #6d3b3b, #a7969700)",
         width:"100%",
         height:"100%",
         position:"absolute"
@@ -32,7 +32,9 @@ const useStyle = makeStyles((theme) => ({
     },
 
     text:{
-        textAlign:"center"
+        textAlign:"center",
+        fontFamily:"Great Vibes, cursive",
+        fontSize:"32px"
     }
     
 }))
@@ -68,7 +70,7 @@ function CardPage() {
                     <div>
                     <div className={classes.text}>
 
-                        <h1 key={myData.id}>{myData.title}</h1>
+                        <h2 key={myData.id}>{myData.title}</h2>
                     </div>
                     
                     <div className={classes.imageDiv}>
