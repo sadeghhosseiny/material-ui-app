@@ -60,7 +60,7 @@ const useStyle = makeStyles((theme) => ({
     animation: `$loadMoreBtn 300ms ${theme.transitions.easing.easeInOut}`,
   },
 
-  moreBtn: {
+  btn: {
     textAlign: "center",
   },
 
@@ -114,7 +114,7 @@ function Home(props) {
       let i = 0;
       //console.log("LEN",len);
       res.data.forEach((data) => {
-        if (i <= 4) {
+        if (i <= 34) {
           setPosts((prev) => [...prev, data]);
           i++;
         }
@@ -201,7 +201,7 @@ function Home(props) {
       <hr />
       <div>{renderData()}</div>
 
-      <div className={` ${bool ? classes.loadMoreBtn : ""}`}>
+      <div className={`${classes.btn} ${bool ? classes.loadMoreBtn : ""}`}>
         <Button
           id="lm"
           variant="contained"

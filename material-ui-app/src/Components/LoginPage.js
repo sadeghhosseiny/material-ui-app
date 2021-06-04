@@ -21,6 +21,11 @@ const useStyle = makeStyles((theme) => ({
             paddingBottom: 0,
             marginTop: 0,
             fontWeight: 500,
+
+            "& .MuiFormLabel-root.Mui-focused":{
+              color: "black"
+            },
+
             "& .MuiFormHelperText-root.Mui-error":{
               color:"maroon"
             },
@@ -29,7 +34,8 @@ const useStyle = makeStyles((theme) => ({
               color:"black"
             },
             "& .MuiInput-underline:after": {
-                borderBottomColor: "purple",
+                borderBottomColor: "rgb(103 187 107)",
+
                 borderBottom:"3px solid",
               },
               "& .MuiInput-underline:before":{
