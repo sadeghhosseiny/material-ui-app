@@ -8,49 +8,12 @@ import Collapse from '@material-ui/core/Collapse';
 import clsx from 'clsx';
 import { IconButton, Paper } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
-import { makeStyles } from "@material-ui/core/styles";
 import {Link} from 'react-router-dom';
+import {myStyleCss} from './CardItemJss';
 
-
-const useStyle = makeStyles((theme)=>({
-    expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-          duration: theme.transitions.duration.shortest,
-        }),
-      },
-      expandOpen: {
-        transform: 'rotate(180deg)',
-      },
-
-      card:{
-        transition: "transform 0.5s",
-        transition:"0.5s",
-        fontFamily: 'Lobster, cursive',
-        fontSize:"26px",
-        "&:hover":{
-          transform: "scale(1.1)",
-          boxShadow:"3px 3px 3px 5px rgb(0.5, 0.5, 0, 0.5)"
-        }
-      },
-
-      bodyTitle:{
-        fontFamily: 'Lobster, cursive',
-        fontSize:"26px",
-      },
-
-      buttonTitle:{
-        fontFamily: 'Fredoka One, cursive',
-      },
-
-      link:{
-        textDecoration:"none"
-      }
-}))
 
 function CardItem({data}) {
-    const classes = useStyle();
+    const classes = myStyleCss();
     const [expand, setExpand] = useState();
 
     const handleExpand = () => {
