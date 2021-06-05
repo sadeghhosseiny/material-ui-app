@@ -4,6 +4,7 @@ import { Grid, Paper } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Carousel from "react-grid-carousel";
+import CircularProgress from '@material-ui/core/CircularProgress';
 import "./home.css";
 import CardItem from "./CardItem";
 import Pagination from "@material-ui/lab/Pagination";
@@ -19,6 +20,7 @@ function Home(props) {
   const [perPage, setPerPage] = useState(2);
   const [temp, setTemp] = useState(0);
   const [tempArr, setTempArr] = useState([]);
+  const [load, setLoad] = useState(false);
   // const [state, setstate] = useState(initialState)
 
   const indexOflast = page * perPage;
@@ -35,51 +37,63 @@ function Home(props) {
     //post.title.toLowerCase().startsWith(props.inputText.toLowerCase());
 
   })
-  
-  useEffect(() => {
+
+  useEffect(async() => {
+    setLoad(true);
     axios
     .get(`https://jsonplaceholder.typicode.com/posts`)
     .then((res) => {
       let i = 0;
+      
+        setPosts(res.data.slice(0, 50))
+      
       //console.log("LEN",len);
-      res.data.forEach((data) => {
-        if (i <= 34) {
-          setPosts((prev) => [...prev, data]);
-          i++;
-        }
-      });
+      // res.data.forEach((data) => {
+      //   if (i <= 34) {
+      //     setPosts((prev) => [...prev, data]);
+      //     i++;
+      //   }
+      //   else {
+
+      //     setLoad(false);
+      //   }
+      
     })
     .catch((error) => {
       console.log(error);
     });
-    
-    
+    await sleep(3500);
+    setLoad(false)
   }, []);
 
   //remember:when you use .map(something => {}) in map, you sould return in curly bracket
   //otherwise .map(something=>) it doesn't need
 
   // const exe = (id) => {
-  //   const newList = posts.filter(post => (post.id !== id))
-  //   setPosts(newList);
-  // }
-  const renderData = () => {
-    return (
-      <Grid container className={classes.container}>
+    //   const newList = posts.filter(post => (post.id !== id))
+    //   setPosts(newList);
+    // }
+    const renderData = () => {
+      return (
+        <Grid container className={classes.container}>
         {console.log("Posts", posts)}
-
-        {filteredTitles
-          ? filteredTitles.slice(0, dataSlice).map((post) => {
+         
+        
+          {filteredTitles.slice(0, dataSlice).map((post) => {
             return (
+            
               <Grid item xs={6} md={3} className={classes.gridItem} /*onClick={() => exe(post.id)}*/ >
-                  <Paper id="pap" className={classes.item} key={post.id}>
-                    {(post.title)}
-                  </Paper>
-                </Grid>
+                {load ? <CircularProgress value="100" style={{width:"100%", display:"flex", 
+      textAlign:"center", justifyContent:"center"}} thickness={3} size="70px" color="secondary" /> : 
+              <Paper id="pap" className={classes.item} key={post.id}>
+               {(post.title)}
+              </Paper>
+              }
+              </Grid>
               );
             })
-            : "Loading"}
-        
+          }
+            
       </Grid>
     );
   };
@@ -109,26 +123,39 @@ function Home(props) {
 
   return (
     <div className={classes.root}>
+      
       <Carousel
         className={classes.carouselItem}
         cols={4}
         rows={1}
         gap={10}
-        
-      >
+
+        >
         {console.log("Posts", posts)}
         {posts ? posts.map((post) => {
-              return (
-                <Carousel.Item >
-                  <CardItem data={post} />
-                </Carousel.Item>
-              );
+          return (
+            
+             
+            <Carousel.Item >
+              {load ? <CircularProgress style={{width:"100%", display:"flex", 
+      textAlign:"center", justifyContent:"center"}} thickness={3} size="70px" color="secondary" /> : <CardItem data={post} />}
+              
+            </Carousel.Item>
+      
+     
+        );
             })
-          : "Loading"}
+            : "Loading"}
       </Carousel>
+        
       <hr />
       <hr />
-      <div>{renderData()}</div>
+      {/* <CircularProgress value="100" style={{width:"100%", display:"flex", 
+      textAlign:"center", justifyContent:"center"}} thickness={3} size="70px" color="secondary" /> */}
+      <div>
+        {console.log("LADING",load)}
+      { renderData()}
+                </div>
 
       <div className={`${classes.btn} ${bool ? classes.loadMoreBtn : ""}`}>
         <Button

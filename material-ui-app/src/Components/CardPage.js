@@ -11,8 +11,6 @@ function CardPage(){
     const [data, setData] = useState([])
     const dataMatch = useRouteMatch();
     const [temp, setTemp] = useState(false);
-    const [wait, setWait] = useState(0)
-
     console.log(dataMatch.params.id);
     function sleep(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
@@ -29,7 +27,7 @@ function CardPage(){
         .catch(err=> {
             console.log(err);
         })
-        setWait(await sleep(3000));
+        await sleep(3000)
         setTemp(false);
             
         }, [])
@@ -47,7 +45,7 @@ function CardPage(){
                     </div>
                     
                     <div className={classes.imageDiv}>
-                    <img className={classes.image} src="https://via.placeholder.com/600/92c952" alt="square" />
+                    <img key={myData.id} className={classes.image} src="https://via.placeholder.com/600/92c952" alt="square" />
                     </div>
                     </div>
                     )
@@ -59,7 +57,7 @@ function CardPage(){
             
             return (
              <div className={classes.root}>
-                {wait}
+                
                 <div>
                 {temp ? <CircularProgress thickness={3} size="70px" className={classes.loading} color="primary" /> : renderCardInfo()}
                     
