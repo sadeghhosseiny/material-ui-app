@@ -1,5 +1,4 @@
 import React, {useState } from 'react';
-import {makeStyles} from '@material-ui/core/styles';
 import {Formik, Form, Field} from 'formik';
 import {TextField} from 'formik-material-ui';
 import Button from '@material-ui/core/Button';
@@ -7,84 +6,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
 import Dialog from '@material-ui/core/Dialog';
 import {Link, useHistory} from 'react-router-dom';
-
-const useStyle = makeStyles((theme) => ({
-        textField: {
-            width: '20%',
-            // display:"flex",
-            // margin: "auto",
-            // justifyContent:"flex-center",
-            // alignItems:"center",
-            // alignContent:"center",
-            // marginLeft: 'auto',
-            // marginRight: 'auto',            
-            paddingBottom: 0,
-            marginTop: 0,
-            fontWeight: 500,
-
-            "& .MuiFormLabel-root.Mui-focused":{
-              color: "black"
-            },
-
-            "& .MuiFormHelperText-root.Mui-error":{
-              color:"maroon"
-            },
-
-            "& .MuiFormLabel-root.Mui-error":{
-              color:"black"
-            },
-            "& .MuiInput-underline:after": {
-                borderBottomColor: "rgb(103 187 107)",
-
-                borderBottom:"3px solid",
-              },
-              "& .MuiInput-underline:before":{
-                  borderColor:"black"
-              },
-              "& .MuiInput-underline:hover:before":{
-                  borderBottom:"1px solid"
-              },
-            
-        },
-
-        form:{
-            // height:"100%",
-            // width:"100%",
-            display:"flex",
-            // background:"red",
-            flexDirection:"column",
-            justifyContent:"center",
-            alignItems:"center",
-            // alignContent:'center',
-        },
-
-        diaLoading:{
-          backdropFilter:"blur(1px)",
-        },
-
-        link:{
-          textDecoration:"none"
-        },
-
-        mainRoot:{
-          // width:"100%",
-          height:"100%",
-          display:"grid",
-          alignContent:"center",
-          background:"linear-gradient(180deg, #000000d1, rgb(245 0 87 / 4%));"
-            // background:"red",
-            // flexDirection:"column",
-            // justifyContent:"center",
-            // alignItems:"center",
-          // display:"flex"
-        },
-
-        text:{
-          textAlign:"center",
-          
-        }
-
-}));
+import { useStyle } from './LoginPageJss';
 
 function LoginPage() {
     const classes = useStyle();
