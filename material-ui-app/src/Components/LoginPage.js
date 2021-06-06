@@ -14,21 +14,33 @@ function LoginPage() {
   const [temp, setTemp] = useState(false);
   const [open, setOpen] = useState(false);
   const history = useHistory();
-  const pageTransition = {
+  
+  const pageVariants = {
     in: {
       opacity: 1,
+      x:0,
+      scale: 1
     },
     out: {
       opacity: 0,
+      x:"-100vw",
+      scale: 0.5
     },
   };
+
+  const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: "1"
+  }
 
   return (
     <motion.div
       initial="out"
       animate="in"
       exit="out"
-      variants={pageTransition}
+      variants={pageVariants}
+      transition={pageTransition}
       className={classes.mainRoot}
     >
       <div className={classes.text}>

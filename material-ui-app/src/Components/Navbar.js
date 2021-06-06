@@ -17,12 +17,14 @@ import HomeIcon from "@material-ui/icons/Home";
 import { ListItemIcon } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useStyle } from "./NavbarJss";
+import { motion } from "framer-motion";
 
 function Navbar({ setInput }) {
   const classes = useStyle();
   const [isFocused, setIsFocused] = useState(false);
   const [open, setOpen] = useState({ left: false });
 
+  
   const ItemList = [
     {
       text: "Home",
@@ -38,13 +40,39 @@ function Navbar({ setInput }) {
       text: "Page3",
     },
   ];
-
+  
   const handleDrawer = (side, open) => (event) => {
     setOpen({ ...open, [side]: open });
   };
 
+  const pageVariants = {
+    in: {
+      opacity: 1,
+      x: 0,
+      scale:1
+    },
+    out: {
+      opacity: 0,
+      x: "-100vw",
+      scale:0.5
+    },
+  };
+
+  const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: "1",
+  };
+  
   return (
-    <div className={classes.appBarContainer}>
+    <motion.div
+      initial="out"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransition}
+      className={classes.appBarContainer}
+    >
       <AppBar className={classes.appBar} position="static">
         <Toolbar>
           <IconButton
@@ -111,7 +139,7 @@ function Navbar({ setInput }) {
           </List>
         </Drawer>
       )}
-    </div>
+    </motion.div>
   );
 }
 
