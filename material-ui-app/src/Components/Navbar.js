@@ -15,10 +15,10 @@ import List from "@material-ui/core/List";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import HomeIcon from "@material-ui/icons/Home";
 import { ListItemIcon } from "@material-ui/core";
-import {Link} from 'react-router-dom';
-import {useStyle} from './NavbarJss'; 
+import { Link } from "react-router-dom";
+import { useStyle } from "./NavbarJss";
 
-function Navbar({setInput}) {
+function Navbar({ setInput }) {
   const classes = useStyle();
   const [isFocused, setIsFocused] = useState(false);
   const [open, setOpen] = useState({ left: false });
@@ -26,7 +26,7 @@ function Navbar({setInput}) {
   const ItemList = [
     {
       text: "Home",
-      icon: <HomeIcon color="primary" />
+      icon: <HomeIcon color="primary" />,
     },
     {
       text: "Page1",
@@ -38,11 +38,11 @@ function Navbar({setInput}) {
       text: "Page3",
     },
   ];
-  
+
   const handleDrawer = (side, open) => (event) => {
     setOpen({ ...open, [side]: open });
   };
-  
+
   return (
     <div className={classes.appBarContainer}>
       <AppBar className={classes.appBar} position="static">
@@ -67,7 +67,6 @@ function Navbar({setInput}) {
                 onFocus={(e) => setIsFocused(true)}
                 onBlur={(e) => setIsFocused(false)}
                 onChange={(e) => setInput(e.target.value)}
-                
               />
               <span className={classes.btnContainer}>
                 <IconButton
@@ -78,14 +77,14 @@ function Navbar({setInput}) {
               </span>
             </div>
           </div>
-            {/* <div className={classes.btnMainContainer}> */}
-              
+          {/* <div className={classes.btnMainContainer}> */}
+
           <Link className={classes.link} to="/LoginPage">
-          <Button className={`${classes.loginButton} ${classes.tr}`}>
-            Login
-          </Button>
+            <Button className={`${classes.loginButton} ${classes.tr}`}>
+              Login
+            </Button>
           </Link>
-            {/* </div> */}
+          {/* </div> */}
         </Toolbar>
       </AppBar>
 

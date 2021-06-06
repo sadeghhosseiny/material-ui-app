@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
-import NavBar from './Navbar';
-import Home from './Home';
+import React, { useState } from "react";
+import NavBar from "./Navbar";
+import Home from "./Home";
 
 function MainPage() {
-    const [input, setInput] = useState('')
+  const [input, setInput] = useState("");
 
-    return (
-        <div>
-            <NavBar setInput={setInput} />
-            {console.log("input from parent",input)}
-            <Home inputText={input} />
-        </div>
-    )
+  return (
+    <div>
+      <NavBar setInput={setInput} />
+      {console.log("input from parent", input)}
+      <Home inputText={input} />
+    </div>
+  );
 }
 
-export default MainPage
+export default MainPage;
